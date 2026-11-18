@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment variables (jangan push kredensial asli)
+.env
+.env.local
+.env.*.local
+.env example
+!.env.example
+
+# Logs & OS files
+*.log
+.DS_Store
+Thumbs.db

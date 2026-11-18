@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom slim scrollbar for HUD panels */
+.readify-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.readify-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.readify-scroll::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.45);
+  border-radius: 9999px;
+}
+.readify-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.65);
+}
+
+@keyframes floatPulse {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+.animate-float-subtle {
+  animation: floatPulse 2.4s ease-in-out infinite;
+}
