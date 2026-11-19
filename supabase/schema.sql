@@ -135,16 +135,14 @@ CREATE POLICY "Allow update book files"
 
 -- ============================================================================
 -- DATA AWAL (SEED)
--- Akun awal:
---   admin@readify.id  / admin123  (Admin Pustakawan)
---   sinta@readify.id  / member123 (Pengunjung)
---   budi@readify.id   / member123 (Pengunjung)
+-- Akun awal (1 akun untuk setiap peran):
+--   admin@readify.id   / admin123  (Admin Pustakawan)
+--   member@readify.id  / member123 (Pengunjung Readify)
 -- ============================================================================
 INSERT INTO public.library_users (name, email, password_hash, role, avatar_color)
 VALUES
   ('Admin Pustakawan', 'admin@readify.id', crypt('admin123', gen_salt('bf')), 'admin', '#ec4899'),
-  ('Sinta Rahma', 'sinta@readify.id', crypt('member123', gen_salt('bf')), 'member', '#3b82f6'),
-  ('Budi Santoso', 'budi@readify.id', crypt('member123', gen_salt('bf')), 'member', '#10b981')
+  ('Pengunjung Readify', 'member@readify.id', crypt('member123', gen_salt('bf')), 'member', '#3b82f6')
 ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO public.shelves (code, name, zone_id, grid_x, grid_z, rotation_y, accent_color, capacity)

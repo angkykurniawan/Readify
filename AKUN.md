@@ -1,13 +1,17 @@
-# Daftar Akun Awal — Readify
+# Informasi Kredensial Akun — Readify
 
-File ini berisi informasi kredensial akun bawaan untuk masuk ke sistem **Readify — Perpustakaan Digital 3D**.
+Sistem ini memiliki **1 akun bawaan untuk setiap peran (role)**:
 
-| Peran | Nama | Email (Username) | Password |
+| Peran | Nama Akun | Email (Login) | Password |
 | :--- | :--- | :--- | :--- |
-| **Admin Pustakawan** | Admin Pustakawan | `admin@readify.id` | `admin123` |
-| **Pengunjung** | Sinta Rahma | `sinta@readify.id` | `member123` |
-| **Pengunjung** | Budi Santoso | `budi@readify.id` | `member123` |
+| **Admin Pustakawan** (`admin`) | Admin Pustakawan | `admin@readify.id` | `admin123` |
+| **Pengunjung** (`member`) | Pengunjung Readify | `member@readify.id` | `member123` |
 
-## Catatan
-- Hanya **Admin Pustakawan** yang dapat menambahkan akun Pengunjung maupun Admin baru melalui menu **Admin → Pengguna**.
-- Disarankan untuk mengganti password bawaan setelah sistem terhubung ke database produksi Supabase.
+---
+
+## Akses Akun Demo
+> **Untuk demo minta akun ke kurniawan.angang2005@gmail.com**
+
+## Ketentuan & Catatan Sistem
+1. **Tidak Ada Pendaftaran Mandiri**: Pengunjung tidak dapat mendaftar sendiri. Seluruh penambahan akun baru (baik Pengunjung maupun Admin) dilakukan langsung oleh Admin Pustakawan melalui menu **Admin → Manajemen Pengguna**.
+2. **Keamanan Login**: Tampilan form login tidak menampilkan kredensial akun bawaan secara publik.

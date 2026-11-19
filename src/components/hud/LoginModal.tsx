@@ -63,7 +63,7 @@ export function LoginModal() {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="nama@readify.id"
+              placeholder="Masukkan email Anda"
               className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
             />
           </div>
@@ -96,9 +96,17 @@ export function LoginModal() {
             {loading ? 'Memproses...' : 'Masuk ke Perpustakaan'}
           </button>
 
-          <p className="pt-1 text-center text-[11px] text-slate-400">
-            Akun pengunjung &amp; pustakawan dikelola langsung oleh Admin Perpustakaan.
-          </p>
+          <div className="pt-2 text-center">
+            <p className="text-xs text-slate-500 font-medium">
+              Untuk demo minta akun ke{' '}
+              <a
+                href="mailto:kurniawan.angang2005@gmail.com"
+                className="font-semibold text-blue-600 hover:text-blue-700 underline underline-offset-2 transition-colors"
+              >
+                kurniawan.angang2005@gmail.com
+              </a>
+            </p>
+          </div>
         </form>
       </div>
     </div>

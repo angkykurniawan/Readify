@@ -11,19 +11,11 @@ export const SEED_USERS: Array<User & { password: string }> = [
   },
   {
     id: 2,
-    name: 'Sinta Rahma',
-    email: 'sinta@readify.id',
+    name: 'Pengunjung Readify',
+    email: 'member@readify.id',
     password: 'member123',
     role: 'member',
     avatar_color: '#3b82f6',
-  },
-  {
-    id: 3,
-    name: 'Budi Santoso',
-    email: 'budi@readify.id',
-    password: 'member123',
-    role: 'member',
-    avatar_color: '#10b981',
   },
 ];
 
