@@ -143,7 +143,11 @@ INSERT INTO public.library_users (name, email, password_hash, role, avatar_color
 VALUES
   ('Admin Pustakawan', 'admin@readify.id', crypt('admin123', gen_salt('bf')), 'admin', '#ec4899'),
   ('Pengunjung Readify', 'member@readify.id', crypt('member123', gen_salt('bf')), 'member', '#3b82f6')
-ON CONFLICT (email) DO NOTHING;
+ON CONFLICT (email) DO UPDATE
+  SET password_hash = EXCLUDED.password_hash,
+      name = EXCLUDED.name,
+      role = EXCLUDED.role,
+      avatar_color = EXCLUDED.avatar_color;
 
 INSERT INTO public.shelves (code, name, zone_id, grid_x, grid_z, rotation_y, accent_color, capacity)
 VALUES
@@ -803,8 +807,23 @@ BEGIN
 END;
 $$;
 
--- Aktifkan Realtime pada tabel utama
-ALTER PUBLICATION supabase_realtime ADD TABLE public.active_sessions;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.shelves;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.books;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.realtime_events;
+-- Aktifkan Realtime pada tabel utama (Aman dijalankan berulang kali)
+DO $$
+BEGIN
+  BEGIN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.active_sessions;
+  EXCEPTION WHEN duplicate_object THEN NULL;
+  END;
+  BEGIN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.shelves;
+  EXCEPTION WHEN duplicate_object THEN NULL;
+  END;
+  BEGIN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.books;
+  EXCEPTION WHEN duplicate_object THEN NULL;
+  END;
+  BEGIN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.realtime_events;
+  EXCEPTION WHEN duplicate_object THEN NULL;
+  END;
+END $$;
