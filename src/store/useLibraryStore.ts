@@ -58,6 +58,7 @@ interface LibraryState {
   selectedBookId: number | null;
   selectedShelfId: number | null;
   hoveredBookId: number | null;
+  readingBookId: number | null;
   flyingBooks: FlyingBookAnim[];
   toasts: ToastItem[];
 
@@ -74,6 +75,7 @@ interface LibraryState {
   focusShelf: (shelfId: number) => void;
   selectBook: (bookId: number | null) => void;
   setHoveredBook: (bookId: number | null) => void;
+  setReadingBookId: (bookId: number | null) => void;
   setActiveDrawer: (drawer: ActiveDrawer) => void;
 
   moveMyAvatarTo: (x: number, z: number, status?: string) => void;
@@ -156,6 +158,7 @@ export const useLibraryStore = create<LibraryState>((set, get) => ({
   selectedBookId: null,
   selectedShelfId: null,
   hoveredBookId: null,
+  readingBookId: null,
   flyingBooks: [],
   toasts: [],
 
@@ -466,6 +469,7 @@ export const useLibraryStore = create<LibraryState>((set, get) => ({
   },
 
   setHoveredBook: (bookId) => set({ hoveredBookId: bookId }),
+  setReadingBookId: (bookId) => set({ readingBookId: bookId }),
 
   setActiveDrawer: (drawer) => {
     set((s) => ({

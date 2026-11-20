@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { AISettingsModal } from './components/hud/AISettingsModal';
 import { AdminDrawer } from './components/hud/AdminDrawer';
 import { BookDrawer } from './components/hud/BookDrawer';
+import { BookReaderModal } from './components/hud/BookReaderModal';
 import { BottomZoneBar } from './components/hud/BottomZoneBar';
 import { CatalogDrawer } from './components/hud/CatalogDrawer';
 import { LoansDrawer } from './components/hud/LoansDrawer';
@@ -71,6 +72,7 @@ export function App() {
           <AdminDrawer />
           <AISettingsModal />
           <OnlineUsersDrawer />
+          <BookReaderModal />
         </>
       )}
 

@@ -1,4 +1,4 @@
-import { BookMarked, CheckCircle2, Clock, RotateCcw, X } from 'lucide-react';
+import { BookMarked, BookOpen, CheckCircle2, Clock, RotateCcw, X } from 'lucide-react';
 import { useState } from 'react';
 import { useLibraryStore } from '../../store/useLibraryStore';
 
@@ -8,6 +8,7 @@ export function LoansDrawer() {
   const shelves = useLibraryStore((s) => s.shelves);
   const setActiveDrawer = useLibraryStore((s) => s.setActiveDrawer);
   const returnLoan = useLibraryStore((s) => s.returnLoan);
+  const setReadingBookId = useLibraryStore((s) => s.setReadingBookId);
   const addToast = useLibraryStore((s) => s.addToast);
 
   const [returningId, setReturningId] = useState<number | null>(null);
@@ -90,15 +91,26 @@ export function LoansDrawer() {
                         </div>
                       </div>
                     </div>
-                    <button
-                      type="button"
-                      disabled={returningId === loan.id}
-                      onClick={() => handleReturn(loan.id)}
-                      className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-3 py-2 text-xs font-bold text-white transition hover:bg-emerald-700 disabled:opacity-60 cursor-pointer"
-                    >
-                      <RotateCcw className="h-3.5 w-3.5" />
-                      {returningId === loan.id ? 'Mengembalikan...' : 'Kembalikan ke Rak'}
-                    </button>
+                    <div className="mt-3 flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setReadingBookId(loan.book_id)}
+                        className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-3 py-2 text-xs font-bold text-white transition hover:bg-blue-700 cursor-pointer shadow-xs"
+                      >
+                        <BookOpen className="h-3.5 w-3.5" />
+                        Baca Buku / PDF
+                      </button>
+                      <button
+                        type="button"
+                        disabled={returningId === loan.id}
+                        onClick={() => handleReturn(loan.id)}
+                        className="flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 disabled:opacity-60 cursor-pointer"
+                        title="Kembalikan ke Rak"
+                      >
+                        <RotateCcw className="h-3.5 w-3.5" />
+                        {returningId === loan.id ? '...' : 'Kembalikan'}
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -121,10 +133,20 @@ export function LoansDrawer() {
                     <div className="truncate font-bold text-slate-700">{loan.title}</div>
                     <div className="text-[10px] text-slate-400">{loan.author}</div>
                   </div>
-                  <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
-                    <CheckCircle2 className="h-3 w-3" />
-                    Kembali
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                      <CheckCircle2 className="h-3 w-3" />
+                      Kembali
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setReadingBookId(loan.book_id)}
+                      className="p-1 text-slate-400 hover:text-blue-600 transition cursor-pointer"
+                      title="Baca / Pratinjau Buku"
+                    >
+                      <BookOpen className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

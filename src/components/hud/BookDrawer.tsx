@@ -28,6 +28,7 @@ export function BookDrawer() {
   const selectBook = useLibraryStore((s) => s.selectBook);
   const borrowSelectedBook = useLibraryStore((s) => s.borrowSelectedBook);
   const attachBookFile = useLibraryStore((s) => s.attachBookFile);
+  const setReadingBookId = useLibraryStore((s) => s.setReadingBookId);
   const setActiveDrawer = useLibraryStore((s) => s.setActiveDrawer);
   const addToast = useLibraryStore((s) => s.addToast);
 
@@ -192,6 +193,16 @@ export function BookDrawer() {
               </div>
 
               <div className="flex shrink-0 items-center gap-1.5">
+                {(book.file_url || book.content_text) && (
+                  <button
+                    type="button"
+                    onClick={() => setReadingBookId(book.id)}
+                    className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-2.5 py-1.5 text-[11px] font-bold text-white hover:bg-blue-700 cursor-pointer shadow-xs"
+                  >
+                    <BookOpen className="h-3 w-3" />
+                    Baca / Preview
+                  </button>
+                )}
                 {book.file_url && (
                   <a
                     href={book.file_url}
@@ -200,7 +211,7 @@ export function BookDrawer() {
                     className="inline-flex items-center gap-1 rounded-lg bg-white px-2.5 py-1.5 text-[11px] font-bold text-blue-700 ring-1 ring-blue-200 hover:bg-blue-50"
                   >
                     <Download className="h-3 w-3" />
-                    Buka
+                    Unduh
                   </a>
                 )}
                 {currentUser?.role === 'admin' && (
@@ -354,13 +365,23 @@ export function BookDrawer() {
       {/* Footer Action */}
       <div className="border-t border-slate-100 bg-slate-50/80 px-5 py-3">
         {alreadyBorrowed ? (
-          <button
-            type="button"
-            onClick={() => setActiveDrawer('loans')}
-            className="w-full rounded-xl bg-amber-500 px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-amber-600 cursor-pointer"
-          >
-            Sedang Anda Pinjam • Lihat Pinjaman
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setReadingBookId(book.id)}
+              className="flex-1 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-blue-700 cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              <BookOpen className="h-4 w-4" />
+              Baca Buku / PDF
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveDrawer('loans')}
+              className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-100 cursor-pointer"
+            >
+              Pinjaman
+            </button>
+          </div>
         ) : (
           <button
             type="button"
